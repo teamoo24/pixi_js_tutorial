@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+		body{
+			margin: 0;
+		}
+
+		canvas{
+			display: block;
+			background: blue;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="mycanvas"></canvas>
+	<script src="pixi.js"></script>
+	<script type="text/javascript">
+		// bodyのcanvasを取得
+		const canvas = document.getElementById('mycanvas');
+
+		// プログラミングのHelperクラス
+		const app = new PIXI.Application({
+			// PIXIアプリケーションおビュー
+			view: canvas,
+			// Windowの幅をwidthに代入
+			width: window.innerWidth,
+			// Windwoの盾をheightに代入
+			height: window.innerHeight
+		});
+
+		// PIXIのtextureにsprite.pngを読み込む
+		const texture = PIXI.Texture.from('sprite.png');
+		// imgに読み込んだtextureを代入
+		const img = new PIXI.Sprite(texture);
+		// imgのx座標をappので指定したxの中央に配置
+		img.x = app.renderer.width / 2;
+		// imgのy座標をappので指定したyの中央に配置
+		img.y = app.renderer.height / 2;
+
+		// imgのxの中心指定
+		img.anchor.x = 0.5;
+		// imgのyの中心指定
+		img.anchor.y = 0.5;
+
+		// 現在ステージにimgを追加
+		app.stage.addChild(img);
+
+		// レンダリング更新の度にanimateを行う
+		app.ticker.add(animate);
+
+		// レンダリング度に行う処理を設定
+		function animate(){
+			// imgを0.1ラジアンづつ回る
+			img.rotation += 1;
+		}
+	</script>
+</body>
+</html>
